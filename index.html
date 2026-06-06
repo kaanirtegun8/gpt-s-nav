@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psikoloji PDF Sınavları</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="questions.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Gelişim psikolojisi</p>
+        <h1>Psikoloji PDF Sınavları</h1>
+      </div>
+      <div class="header-stat">
+        <strong>10</strong>
+        <span>sınav</span>
+      </div>
+      <div class="header-stat">
+        <strong>350</strong>
+        <span>soru</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="setup-view" id="setupView">
+        <div class="section-head">
+          <div>
+            <h2>Sınavını seç</h2>
+            <p>Her sınavda 10 boşluk doldurma ve 25 çoktan seçmeli soru var. Sorular dört PDF içeriğinden karışık gelir.</p>
+          </div>
+        </div>
+
+        <div class="exam-grid" id="examGrid"></div>
+
+        <div class="mode-panel">
+          <div>
+            <h2>Cevap modu</h2>
+            <p>İki mod da aynı soruları kullanır; sadece cevapların görünme zamanı değişir.</p>
+          </div>
+          <label class="mode-option">
+            <input type="radio" name="answerMode" value="finish" checked>
+            <span>
+              <strong>Sınavı bitirince göster</strong>
+              <small>Cevaplar ve puanlama en sonda açılır.</small>
+            </span>
+          </label>
+          <label class="mode-option">
+            <input type="radio" name="answerMode" value="instant">
+            <span>
+              <strong>Tek tek kontrol et</strong>
+              <small>Her sorudan sonra doğru cevap görünür.</small>
+            </span>
+          </label>
+          <button class="primary-action" type="button" id="startExam">Sınava başla</button>
+        </div>
+      </section>
+
+      <section class="exam-view" id="examView" hidden>
+        <aside class="exam-sidebar">
+          <button class="text-action" type="button" id="backToSetup">Sınav seçimine dön</button>
+          <div>
+            <p class="eyebrow" id="modeBadge"></p>
+            <h2 id="examTitle"></h2>
+            <p id="examSubtitle"></p>
+          </div>
+          <div class="progress-block">
+            <div class="progress-line">
+              <span id="progressText">0/35 cevaplandı</span>
+              <strong id="scoreNow">Puan bitince açılır</strong>
+            </div>
+            <div class="progress-track">
+              <span id="progressBar"></span>
+            </div>
+          </div>
+          <div class="question-nav" id="questionNav" aria-label="Soru geçişleri"></div>
+          <button class="secondary-action" type="button" id="resetExam">Sıfırla</button>
+        </aside>
+
+        <div class="question-workspace">
+          <article class="question-card" id="questionCard"></article>
+          <div class="exam-actions">
+            <button class="secondary-action" type="button" id="prevQuestion">Önceki</button>
+            <button class="secondary-action" type="button" id="nextQuestion">Sonraki</button>
+            <button class="primary-action" type="button" id="finishExam">Sınavı bitir</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-view" id="resultsView" hidden>
+        <div class="results-summary">
+          <div>
+            <p class="eyebrow">Sonuç</p>
+            <h2 id="resultScore">0/35</h2>
+            <p id="resultLabel"></p>
+            <span id="resultMeta"></span>
+          </div>
+          <button class="secondary-action" type="button" id="newExam">Yeni sınav seç</button>
+        </div>
+        <div class="breakdown-grid">
+          <div>
+            <h3>Soru türü</h3>
+            <div id="typeBreakdown"></div>
+          </div>
+          <div>
+            <h3>PDF kaynağı</h3>
+            <div id="sourceBreakdown"></div>
+          </div>
+        </div>
+        <div class="review-head">
+          <h3>Cevap anahtarı ve tekrar listesi</h3>
+          <p>Yanlış ve boş cevaplarda doğru kavram ile kısa açıklama burada görünür.</p>
+        </div>
+        <div class="review-list" id="reviewList"></div>
+      </section>
+    </main>
+  </body>
+</html>

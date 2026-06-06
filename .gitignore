@@ -1,0 +1,5 @@
+.DS_Store
+ocr/
+extracted/
+node_modules/
+dist/
