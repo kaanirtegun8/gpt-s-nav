@@ -6,6 +6,8 @@
 - Her sınavda 10 boşluk doldurma ve 25 çoktan seçmeli soru
 - İki cevap modu: sınav sonunda gösterme veya tek tek kontrol
 - Puanlama, soru türü kırılımı, PDF kaynağı kırılımı ve cevap anahtarı
+- Ayrı klasik sorular sekmesi
+- 24 klasik soru ve açılır örnek cevaplar
 
 ## Netlify
 

@@ -1,8 +1,11 @@
 const exams = window.PSYCH_EXAMS || [];
+const essayQuestions = window.PSYCH_ESSAY_QUESTIONS || [];
 
 const state = {
   selectedExamId: 1,
   activeExam: null,
+  activeTab: "exam",
+  essayFilter: "all",
   mode: "finish",
   currentIndex: 0,
   answers: {},
@@ -17,9 +20,15 @@ function $(selector) {
 }
 
 function initializeElements() {
+  els.topTabs = $("#topTabs");
+  els.examTabButton = $("#examTabButton");
+  els.essayTabButton = $("#essayTabButton");
   els.examGrid = $("#examGrid");
   els.startButton = $("#startExam");
   els.setup = $("#setupView");
+  els.essay = $("#essayView");
+  els.essayFilters = $("#essayFilters");
+  els.essayGrid = $("#essayGrid");
   els.exam = $("#examView");
   els.results = $("#resultsView");
   els.modeRadios = [...document.querySelectorAll("input[name='answerMode']")];
@@ -43,6 +52,10 @@ function initializeElements() {
   els.sourceBreakdown = $("#sourceBreakdown");
   els.reviewList = $("#reviewList");
   els.newExamButton = $("#newExam");
+  els.finishModal = $("#finishModal");
+  els.finishSummary = $("#finishSummary");
+  els.cancelFinishButton = $("#cancelFinish");
+  els.confirmFinishButton = $("#confirmFinish");
 }
 
 function normalizeAnswer(value) {
@@ -158,6 +171,95 @@ function renderExamGrid() {
   });
 }
 
+function renderTabs() {
+  const isExamTab = state.activeTab === "exam";
+  els.examTabButton.classList.toggle("is-active", isExamTab);
+  els.essayTabButton.classList.toggle("is-active", !isExamTab);
+  els.examTabButton.setAttribute("aria-pressed", String(isExamTab));
+  els.essayTabButton.setAttribute("aria-pressed", String(!isExamTab));
+}
+
+function showHomeTab(tabName) {
+  state.activeTab = tabName;
+  renderTabs();
+  els.topTabs.hidden = false;
+  els.exam.hidden = true;
+  els.results.hidden = true;
+  els.setup.hidden = tabName !== "exam";
+  els.essay.hidden = tabName !== "essay";
+
+  if (tabName === "exam") {
+    renderExamGrid();
+  } else {
+    renderEssayQuestions();
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderEssayQuestions() {
+  const sourceFilters = [
+    ["all", "Tümü"],
+    ["genc", "Genç"],
+    ["orta", "Orta"],
+    ["ileri", "İleri"],
+    ["olum", "Ölüm ve Yas"],
+  ];
+
+  els.essayFilters.innerHTML = sourceFilters
+    .map(([key, label]) => `
+      <button class="filter-button ${state.essayFilter === key ? "is-active" : ""}" type="button" data-filter="${key}" aria-pressed="${state.essayFilter === key}">
+        ${label}
+      </button>
+    `)
+    .join("");
+
+  els.essayFilters.querySelectorAll("[data-filter]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.essayFilter = button.dataset.filter;
+      renderEssayQuestions();
+    });
+  });
+
+  const visibleQuestions = essayQuestions.filter((question) => (
+    state.essayFilter === "all" || question.sourceKey === state.essayFilter
+  ));
+
+  els.essayGrid.innerHTML = visibleQuestions
+    .map((question, index) => `
+      <article class="essay-card">
+        <div class="essay-card__head">
+          <span class="source-chip source-${question.sourceKey}">
+            <span>${question.source}</span>
+            <small>${question.topic}</small>
+          </span>
+          <span class="essay-count">${index + 1}/${visibleQuestions.length}</span>
+        </div>
+        <h3>${question.question}</h3>
+        <div class="keyword-row">
+          ${question.keywords.map((keyword) => `<span>${keyword}</span>`).join("")}
+        </div>
+        <button class="secondary-action essay-answer-toggle" type="button" data-essay-id="${question.id}" aria-expanded="false">
+          Örnek cevabı göster
+        </button>
+        <div class="essay-answer" id="answer-${question.id}" hidden>
+          ${question.answer.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+        </div>
+      </article>
+    `)
+    .join("");
+
+  els.essayGrid.querySelectorAll("[data-essay-id]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const answer = $(`#answer-${button.dataset.essayId}`);
+      const willOpen = answer.hidden;
+      answer.hidden = !willOpen;
+      button.setAttribute("aria-expanded", String(willOpen));
+      button.textContent = willOpen ? "Örnek cevabı gizle" : "Örnek cevabı göster";
+    });
+  });
+}
+
 function updateModeFromInputs() {
   state.mode = els.modeRadios.find((radio) => radio.checked)?.value || "finish";
 }
@@ -171,6 +273,8 @@ function startExam() {
   state.finished = false;
 
   els.setup.hidden = true;
+  els.essay.hidden = true;
+  els.topTabs.hidden = true;
   els.results.hidden = true;
   els.exam.hidden = false;
   renderExam();
@@ -180,9 +284,8 @@ function startExam() {
 function leaveExam() {
   els.exam.hidden = true;
   els.results.hidden = true;
-  els.setup.hidden = false;
-  renderExamGrid();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  closeFinishModal();
+  showHomeTab("exam");
 }
 
 function resetExam() {
@@ -401,6 +504,21 @@ function moveQuestion(delta) {
   renderExam();
 }
 
+function openFinishModal() {
+  if (state.finished) return;
+  const questions = state.activeExam.questions;
+  const answered = questions.filter(hasAnswer).length;
+  const unanswered = questions.length - answered;
+  els.finishSummary.textContent = `${answered}/${questions.length} soru cevaplandı, ${unanswered} soru boş. Bitirirsen cevap anahtarı ve puanlama açılacak; cevapları değiştiremeyeceksin.`;
+  els.finishModal.hidden = false;
+  els.confirmFinishButton.focus();
+}
+
+function closeFinishModal() {
+  if (!els.finishModal) return;
+  els.finishModal.hidden = true;
+}
+
 function finishExam() {
   state.finished = true;
   state.activeExam.questions.forEach((question) => {
@@ -462,13 +580,31 @@ function metricRow(label, correct, total) {
 }
 
 function bindEvents() {
+  els.examTabButton.addEventListener("click", () => showHomeTab("exam"));
+  els.essayTabButton.addEventListener("click", () => showHomeTab("essay"));
   els.startButton.addEventListener("click", startExam);
   els.prevButton.addEventListener("click", () => moveQuestion(-1));
   els.nextButton.addEventListener("click", () => moveQuestion(1));
-  els.finishButton.addEventListener("click", finishExam);
+  els.finishButton.addEventListener("click", openFinishModal);
   els.backButton.addEventListener("click", leaveExam);
   els.resetButton.addEventListener("click", resetExam);
   els.newExamButton.addEventListener("click", leaveExam);
+  els.cancelFinishButton.addEventListener("click", closeFinishModal);
+  els.confirmFinishButton.addEventListener("click", () => {
+    closeFinishModal();
+    finishExam();
+  });
+  els.finishModal.addEventListener("click", (event) => {
+    if (event.target === els.finishModal) {
+      closeFinishModal();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !els.finishModal.hidden) {
+      closeFinishModal();
+    }
+  });
 
   els.modeRadios.forEach((radio) => {
     radio.addEventListener("change", updateModeFromInputs);
@@ -478,6 +614,8 @@ function bindEvents() {
 function init() {
   initializeElements();
   renderExamGrid();
+  renderEssayQuestions();
+  renderTabs();
   bindEvents();
 }
 

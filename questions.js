@@ -249,6 +249,321 @@
     C("olum43", "olum", "Anlamlandırma", "dünyayı anlamlandırmak", "Yasın, bireyleri ölüm sonrası deneyimi ve yaşam varsayımlarını anlamlandırmaya yöneltmesi.", "Yasın harekete geçirdiği süreçlerden biri ____ anlamlandırmaktır."),
   ];
 
+  const ESSAY_QUESTIONS = [
+    {
+      id: "essay-genc-01",
+      sourceKey: "genc",
+      source: SOURCE_LABELS.genc,
+      topic: "Beliren yetişkinlik",
+      question: "Arnett'in beliren yetişkinlik kuramını açıklayınız. Bu dönemin neden ergenlikten ve tam yetişkinlikten ayrı değerlendirildiğini örneklerle tartışınız.",
+      answer: [
+        "Beliren yetişkinlik yaklaşık 18-25 yaş aralığında, ergenlikten yetişkinliğe geçişi anlatan bir dönemdir. Bu dönemde kişi artık ergen değildir; fakat ekonomik bağımsızlık, kalıcı iş, evlilik veya ebeveynlik gibi geleneksel yetişkin rollerini de tam olarak üstlenmemiş olabilir.",
+        "Arnett bu dönemi kimlik arayışı, kararsızlık, öze dönüklük, arada kalmışlık ve olasılıklar dönemi olarak açıklar. Örneğin üniversite öğrencisinin bölüm, meslek, ilişki ve yaşam tarzı denemeleri yapması kimlik arayışına; iş ve şehir değiştirmesi kararsızlığa örnektir.",
+        "Bu dönem ergenlikten ayrılır çünkü birey daha fazla özerklik ve sorumluluk kazanır. Tam yetişkinlikten ayrılır çünkü uzun vadeli roller henüz kesinleşmemiştir. Bu nedenle gelişimsel olarak geçici, keşif ağırlıklı ve kültürel koşullardan etkilenen bir dönemdir.",
+      ],
+      keywords: ["Arnett", "kimlik arayışı", "kararsızlık", "olasılıklar", "18-25"],
+    },
+    {
+      id: "essay-genc-02",
+      sourceKey: "genc",
+      source: SOURCE_LABELS.genc,
+      topic: "Bilişsel gelişim",
+      question: "Genç yetişkinlikte gerçekçi-pragmatik düşünme, yansıtıcı-göreceli düşünme ve postformal düşünme kavramlarını karşılaştırınız.",
+      answer: [
+        "Gerçekçi ve pragmatik düşünme, bireyin yaşamın sınırlılıklarını görerek ideal çözümler yerine uygulanabilir çözümlere yönelmesidir. Genç yetişkin iş ve ilişki deneyimleriyle yalnızca neyin doğru olduğunu değil, neyin yapılabilir olduğunu da düşünür.",
+        "Yansıtıcı ve göreceli düşünme, tek bir kesin doğru yerine bağlamı, farklı bakış açılarını ve kanıtları dikkate almayı içerir. Perry'nin yaklaşımında ergenlikteki siyah-beyaz düşünme yerini daha esnek değerlendirmelere bırakır.",
+        "Postformal düşünme bu iki yönü birleştirir: Sorunların cevabı duruma göre değişebilir, doğruyu arama süreci bitmeyebilir ve birey çelişkili bilgileri birlikte değerlendirebilir. Bu nedenle genç yetişkinlikte bilişsel gelişim sadece bilgi artışı değil, düşünme tarzının olgunlaşmasıdır.",
+      ],
+      keywords: ["pragmatik", "yansıtıcı", "göreceli", "postformal", "bağlam"],
+    },
+    {
+      id: "essay-genc-03",
+      sourceKey: "genc",
+      source: SOURCE_LABELS.genc,
+      topic: "Sağlık davranışları",
+      question: "Genç yetişkinlikte sağlık alışkanlıklarının uzun vadeli yaşam doyumu ve fiziksel sağlık üzerindeki etkisini açıklayınız.",
+      answer: [
+        "Genç yetişkinlik fiziksel performansın yüksek olduğu bir dönemdir; ancak bu durum sağlık risklerinin olmadığı anlamına gelmez. Ergenlikten taşınan hareketsizlik, kötü beslenme, obezite, sigara, alkol ve madde kullanımı bu dönemde kalıcı alışkanlıklara dönüşebilir.",
+        "Obezite; tansiyon, diyabet ve kalp-damar hastalıkları gibi sorunlarla ilişkilidir. Düzenli egzersiz ise yalnızca kilo kontrolüne değil, benlik algısına, anksiyete ve depresyonun azalmasına da katkı sağlar.",
+        "Bu nedenle genç yetişkinlikte geliştirilen sağlık davranışları ileri yaşlardaki sağlık kapasitesini etkiler. Dönem kısa vadede güçlü görünse de, yaşam boyu gelişim açısından koruyucu alışkanlıkların kurulduğu kritik bir basamaktır.",
+      ],
+      keywords: ["obezite", "egzersiz", "madde kullanımı", "yaşam doyumu", "koruyucu alışkanlık"],
+    },
+    {
+      id: "essay-genc-04",
+      sourceKey: "genc",
+      source: SOURCE_LABELS.genc,
+      topic: "Bağlanma ve yakınlık",
+      question: "Yetişkin bağlanma biçimlerinin genç yetişkinlikte yakın ilişki kurma, aşk ve evlilik kararları üzerindeki etkisini açıklayınız.",
+      answer: [
+        "Bağlanma bebeklikte temellenen, fakat yetişkin yakın ilişkilerinde de etkisini sürdüren bir örüntüdür. Güvenli bağlanma yakınlık kurmayı kolaylaştırırken, kaygılı veya kaçınmacı örüntüler ilişkide aşırı bağımlılık, terk edilme korkusu ya da yakınlıktan kaçma biçiminde görülebilir.",
+        "Dörtlü bağlanma modelinde güvenli, saplantılı, kayıtsız ve korkulu bağlanma biçimleri benlik ve başkaları modellerine göre ayrılır. Olumlu benlik ve olumlu başkaları modeli ilişki kurmayı kolaylaştırır; olumsuz modeller ilişkiyi tehdit algısıyla zorlaştırabilir.",
+        "Genç yetişkinlik Erikson'a göre yakınlığa karşı yalıtılmışlık dönemidir. Kişi yakın ilişki kuramazsa yalnızlık ve yalıtılmışlık yaşayabilir; sağlıklı bağlanma ise romantik ilişki, arkadaşlık ve evlilikte karşılıklı güveni destekler.",
+      ],
+      keywords: ["güvenli bağlanma", "saplantılı", "kayıtsız", "korkulu", "yakınlık"],
+    },
+    {
+      id: "essay-genc-05",
+      sourceKey: "genc",
+      source: SOURCE_LABELS.genc,
+      topic: "İş ve kariyer",
+      question: "Genç yetişkinlikte iş, kariyer seçimi ve işsizlik neden gelişimsel açıdan önemlidir? Cam tavan ve çift gelirli çiftler kavramlarını da kullanarak tartışınız.",
+      answer: [
+        "Genç yetişkinlikte iş seçimi kimlik gelişiminin önemli bir parçasıdır. İş, bireyin ekonomik bağımsızlığını, sosyal çevresini, günlük yaşam düzenini ve benlik algısını etkiler. Bu nedenle kariyer kararı yalnızca ekonomik değil, psikososyal bir karardır.",
+        "İşsizlik stres, düşük benlik algısı, depresyon ve aile/evlilik sorunlarıyla ilişkilendirilebilir. Çift gelirli çiftlerde ise iki kişinin çalışması ekonomik destek sağlasa da ev işleri, çocuk bakımı ve iş-yaşam dengesi yeni çatışmalar yaratabilir.",
+        "Cam tavan kavramı kadınların ve azınlıkların başarılarına rağmen üst pozisyonlara yükselmesini engelleyen görünmez bariyerleri anlatır. Bu kavram, kariyer gelişiminin bireysel yetenek kadar sosyal yapı ve ayrımcılıkla da ilişkili olduğunu gösterir.",
+      ],
+      keywords: ["kariyer", "işsizlik", "ekonomik bağımsızlık", "cam tavan", "çift gelirli çiftler"],
+    },
+    {
+      id: "essay-genc-06",
+      sourceKey: "genc",
+      source: SOURCE_LABELS.genc,
+      topic: "Aşk ve ilişkiler",
+      question: "Romantik aşk, samimi aşk ve Sternberg'in aşk üçgeni yaklaşımını genç yetişkinlikte ilişki gelişimi açısından açıklayınız.",
+      answer: [
+        "Romantik aşk genellikle ilişkinin ilk dönemlerinde yoğun tutku ve cinsellik içerir. Samimi aşk ise zamanla gelişen şefkat, güven, yoldaşlık ve bağlılık yönüyle öne çıkar. Bu nedenle ilişki olgunlaştıkça tutkunun yerini daha kalıcı bağlanma alabilir.",
+        "Sternberg aşkı tutku, samimiyet ve bağlanma boyutlarıyla açıklar. Bu boyutların farklı birleşimleri farklı aşk türlerini oluşturur. Örneğin yalnız tutku geçici bir çekim yaratabilir; samimiyet ve bağlanma ise uzun süreli ilişkiyi destekler.",
+        "Genç yetişkinlikte yakınlık kurma ihtiyacı güçlüdür. Sağlıklı ilişki yalnızca çekicilikten değil, kendini açma, karşılıklı güven, benzer değerler ve bağımsızlık-yakınlık dengesinden oluşur.",
+      ],
+      keywords: ["romantik aşk", "samimi aşk", "Sternberg", "tutku", "bağlanma"],
+    },
+    {
+      id: "essay-orta-01",
+      sourceKey: "orta",
+      source: SOURCE_LABELS.orta,
+      topic: "Fiziksel değişim",
+      question: "Orta yetişkinlikte fiziksel değişimlerin genel özelliklerini açıklayınız. Bu değişimlerin bireyler arasında neden farklılık gösterdiğini tartışınız.",
+      answer: [
+        "Orta yetişkinlik yaklaşık 40-45 yaşlarından 60-65 yaşlarına kadar uzanan dönemdir. Bu dönemde fiziksel değişimler ergenlikteki gibi ani değil, çoğunlukla yavaş ve kademelidir. Görme ve işitme azalması, ciltte kırışma, kas gücü kaybı, kilo artışı ve kemik yoğunluğunda azalma görülebilir.",
+        "Sarcopenia yaşla ilişkili kas kütlesi ve güç kaybını, osteoporoz ise kemik dokusu kaybını anlatır. Görme uyumunun azalması yakın nesneleri görmeyi zorlaştırırken, duyma kaybı da orta yaşta başlayabilir.",
+        "Bu değişimlerin derecesi genetik yapı, beslenme, egzersiz, sigara/alkol kullanımı, stres, kronik hastalıklar ve sosyoekonomik koşullara göre değişir. Bu yüzden orta yaş tek tip bir gerileme dönemi değil, bireysel farklılıkların belirgin olduğu bir geçiş dönemidir.",
+      ],
+      keywords: ["sarcopenia", "osteoporoz", "görme", "işitme", "bireysel farklılık"],
+    },
+    {
+      id: "essay-orta-02",
+      sourceKey: "orta",
+      source: SOURCE_LABELS.orta,
+      topic: "Cinsellik ve hormonlar",
+      question: "Klimakterik, menopoz ve orta yaşlı erkeklerde hormonal değişiklikleri karşılaştırınız. Bu değişimlerin psikososyal etkileri neler olabilir?",
+      answer: [
+        "Klimakterik, doğurganlığın azaldığı orta yaşa geçişi anlatır. Menopoz ise kadının menstrüel döneminin tamamen sona ermesidir ve çoğunlukla 40'lı yaşların sonu ile 50'li yaşların başında görülür. Östrojen azalması sıcak basması, yorgunluk ve hızlı kalp atışı gibi belirtiler yaratabilir.",
+        "Erkeklerde üreme kapasitesi tamamen bitmez; ancak testosteron üretimi ve sperm sayısı yavaş biçimde azalabilir. Erektil fonksiyon bozukluğu bazı erkeklerde cinsel performans ve benlik algısı üzerinde etkili olabilir.",
+        "Bu biyolojik değişimler yalnızca fizyolojik değildir. Toplumsal yaşlanma algısı, beden imgesi, evlilik doyumu, cinsel iletişim ve sağlık hizmetlerine erişim psikososyal etkileri belirler. Sağlıklı uyum için doğru bilgi, açık iletişim ve tıbbi destek önemlidir.",
+      ],
+      keywords: ["klimakterik", "menopoz", "östrojen", "testosteron", "psikososyal etki"],
+    },
+    {
+      id: "essay-orta-03",
+      sourceKey: "orta",
+      source: SOURCE_LABELS.orta,
+      topic: "Zeka ve biliş",
+      question: "Orta yetişkinlikte kristalize zeka ve akıcı zeka nasıl değişir? Seattle Boylamsal Çalışması bu konuda neden önemlidir?",
+      answer: [
+        "Kristalize zeka, bireyin yaşam boyunca biriktirdiği bilgi, kelime dağarcığı ve sözel becerilere dayanır. Deneyimle geliştiği için orta yetişkinlikte artmaya devam edebilir. Akıcı zeka ise yeni ve soyut problemleri hızlı çözme, yeni ilişkiler kurma ve esnek muhakeme yeteneğidir; yaşla birlikte daha erken düşme eğilimi gösterebilir.",
+        "Seattle Boylamsal Çalışması yetişkinlik boyunca zihinsel yeteneklerin durağanlık ve değişimini uzun süreli verilerle incelemesi açısından önemlidir. Çalışmada sözel yetenek, sözel bellek, tümevarımsal muhakeme ve mekansal yönelim gibi bazı becerilerin orta yaşta yüksek kalabildiği; algısal hız gibi bazı becerilerin daha erken düştüğü görülür.",
+        "Bu bulgular orta yaşın bilişsel çöküş dönemi olmadığını gösterir. Hız ve yeni bilgi işleme bazı alanlarda zayıflayabilir; fakat bilgi, uzmanlık, pratik problem çözme ve deneyime dayalı yargı güçlü kalabilir.",
+      ],
+      keywords: ["kristalize zeka", "akıcı zeka", "Seattle", "algısal hız", "uzmanlık"],
+    },
+    {
+      id: "essay-orta-04",
+      sourceKey: "orta",
+      source: SOURCE_LABELS.orta,
+      topic: "Kişilik kuramları",
+      question: "Erikson'un üretkenliğe karşı verimsizlik dönemi ile Levinson'un orta yaş geçişi yaklaşımını karşılaştırınız.",
+      answer: [
+        "Erikson'a göre orta yetişkinliğin temel krizi üretkenliğe karşı verimsizliktir. Üretkenlik, bireyin çocuklar, öğrenciler, iş, toplum veya kültür yoluyla gelecek kuşaklara katkıda bulunmasıdır. Verimsizlik ise kişinin yalnızca kendine yönelmesi ve kalıcı bir katkı üretemediğini hissetmesidir.",
+        "Levinson ise orta yaş geçişini bireyin gençlikten yaşlılığa, yıkıcılıktan yapıcılığa, erkeksilikten kadınsılığa ve başkalarıyla olmaktan ayrışmaya doğru yaşadığı çatışmalarla açıklar. Bu yaklaşım orta yaşta yaşamı yeniden değerlendirme temasına odaklanır.",
+        "İki yaklaşım da orta yaşta değerlendirme ve yeniden düzenleme olduğunu kabul eder. Ancak Erikson daha çok toplumsal katkı ve kuşaklararası aktarımı vurgularken, Levinson bireyin yaşam yapısını ve içsel zıtlıklarını yeniden düzenlemesini öne çıkarır.",
+      ],
+      keywords: ["üretkenlik", "verimsizlik", "Levinson", "orta yaş geçişi", "yaşam değerlendirmesi"],
+    },
+    {
+      id: "essay-orta-05",
+      sourceKey: "orta",
+      source: SOURCE_LABELS.orta,
+      topic: "Yaşam olayları ve bağlam",
+      question: "Yaşam olayları yaklaşımı, sosyal saat ve kuşak etkisi kavramlarını orta yetişkinlik gelişimini açıklamak için kullanınız.",
+      answer: [
+        "Yaşam olayları yaklaşımı, kişilik ve uyum değişimlerini yalnızca yaşa bağlı evrelerle değil; evlilik, boşanma, iş kaybı, hastalık, eşin ölümü gibi olayların yarattığı stresle açıklar. Çağdaş yaklaşımda olayın etkisi kişinin kaynaklarına, aile desteğine, sağlığına ve sosyo-tarihsel bağlama bağlıdır.",
+        "Sosyal saat, bireylerden belirli yaşlarda evlenme, çocuk sahibi olma, kariyer kurma veya emekli olma gibi görevleri yerine getirmesinin beklenmesidir. Bu beklentiler kişinin kendini erken, geç veya zamanında hissetmesine yol açabilir.",
+        "Kuşak etkisi ise aynı tarihsel dönemde doğanların benzer toplumsal koşullardan etkilenmesidir. Örneğin ekonomik kriz, savaş, eğitim olanakları veya kadınların iş gücüne katılımı orta yaş deneyimini değiştirir. Bu üç kavram orta yetişkinliğin yalnız biyolojik değil, toplumsal bir süreç olduğunu gösterir.",
+      ],
+      keywords: ["yaşam olayları", "sosyal saat", "kuşak etkisi", "bağlam", "stres"],
+    },
+    {
+      id: "essay-orta-06",
+      sourceKey: "orta",
+      source: SOURCE_LABELS.orta,
+      topic: "Aile ilişkileri",
+      question: "Orta yetişkinlikte aile rollerini boş yuva, büyük ebeveynlik ve nesillerarası ilişkiler açısından açıklayınız.",
+      answer: [
+        "Orta yetişkinlikte bireyler hem yetişkin çocuklarıyla hem yaşlanan ebeveynleriyle hem de torunlarıyla ilişkilerini yeniden düzenler. Çocukların evden ayrılması boş yuva deneyimini yaratır; bu durum bazı ailelerde özgürlük ve evlilik doyumu, bazılarında ise kayıp ve yalnızlık duygusu doğurabilir.",
+        "Ekonomik belirsizlik, boşanma veya iş sorunları nedeniyle yetişkin çocukların eve dönmesi boş yuvanın yeniden doldurulmasıdır. Bu durum ebeveynlerin rollerini yeniden tanımlamasını gerektirir.",
+        "Yaşam süresinin uzaması büyük ebeveynliği daha görünür hale getirmiştir. Orta yaş yetişkinleri aynı zamanda genç kuşaklara değer ve deneyim aktarırken, yaşlı kuşaklara bakım desteği sağlayabilir. Bu yüzden orta yetişkinlik kuşaklar arasında köprü kurulan bir dönemdir.",
+      ],
+      keywords: ["boş yuva", "büyük ebeveynlik", "nesillerarası", "yetişkin çocuk", "bakım"],
+    },
+    {
+      id: "essay-ileri-01",
+      sourceKey: "ileri",
+      source: SOURCE_LABELS.ileri,
+      topic: "Uzun ömür ve yaş kategorileri",
+      question: "Yaşam beklentisi, yaşam uzamı ve işlevsel yaş kavramlarını açıklayınız. Genç-yaşlı, yaşlı-yaşlı ve en yaşlı-yaşlı ayrımı neden tek başına yeterli değildir?",
+      answer: [
+        "Yaşam beklentisi, belirli bir yılda doğan ortalama bir insanın yaşaması beklenen yıl sayısıdır. Yaşam uzamı ise insanın ulaşabileceği biyolojik üst sınırı ifade eder. Bu iki kavram aynı değildir; beklenti toplum koşullarına göre değişirken, uzam maksimum sınırı anlatır.",
+        "Genç-yaşlı 65-74, yaşlı-yaşlı 75-84, en yaşlı-yaşlı 85 yaş ve üzeri grupları ifade eder. Bu sınıflama pratik olsa da bireyin gerçek işlevselliğini her zaman yansıtmaz.",
+        "İşlevsel yaş, kişinin biyolojik, psikolojik ve sosyal işlevlerine bakar. Örneğin 85 yaşındaki bir kişi sağlık, bilişsel kapasite ve sosyal katılım açısından 70 yaşındaki başka bir kişiden daha iyi durumda olabilir. Bu nedenle yaşlılığı yalnız kronolojik yaşla açıklamak eksik kalır.",
+      ],
+      keywords: ["yaşam beklentisi", "yaşam uzamı", "işlevsel yaş", "genç-yaşlı", "en yaşlı-yaşlı"],
+    },
+    {
+      id: "essay-ileri-02",
+      sourceKey: "ileri",
+      source: SOURCE_LABELS.ileri,
+      topic: "Biyolojik yaşlanma",
+      question: "Yaşlanmanın biyolojik kuramlarından hücresel saat, serbest radikal, mitokondrial ve hormonal stres kuramlarını karşılaştırınız.",
+      answer: [
+        "Hücresel saat kuramı, hücrelerin sınırlı sayıda bölünebildiğini ve telomerlerin her bölünmede kısalarak hücre yenilenmesini sınırladığını savunur. Bu yaklaşım yaşlanmayı hücresel yenilenme kapasitesinin azalmasıyla açıklar.",
+        "Serbest radikal kuramı, metabolizma sonucu oluşan kararsız oksijen moleküllerinin DNA ve hücresel yapılara zarar verdiğini öne sürer. Mitokondrial kuram ise enerji üretiminden sorumlu mitokondrilerin bozulmasının yaşlanmaya ve hastalıklara katkıda bulunduğunu savunur.",
+        "Hormonal stres kuramı, yaşlanmayla hormonal sistemin strese direnç kapasitesinin azalmasını ve hastalık riskinin artmasını vurgular. Bu kuramlar birbirini dışlamaz; yaşlanma büyük olasılıkla birden fazla biyolojik mekanizmanın ortak etkisidir.",
+      ],
+      keywords: ["hücresel saat", "telomer", "serbest radikal", "mitokondri", "hormonal stres"],
+    },
+    {
+      id: "essay-ileri-03",
+      sourceKey: "ileri",
+      source: SOURCE_LABELS.ileri,
+      topic: "Sağlık ve başarılı yaşlanma",
+      question: "İleri yetişkinlikte fiziksel sağlık, duyusal kayıplar, egzersiz ve beslenmenin başarılı yaşlanmadaki rolünü açıklayınız.",
+      answer: [
+        "İleri yetişkinlikte görsel keskinlik, işitme, tat, koku ve dokunma gibi duyusal işlevlerde azalma görülebilir. Katarakt, glokom, maküler dejenerasyon, yüksek tansiyon, akciğer kapasitesinde azalma, arterit ve osteoporoz bu dönemin önemli sağlık başlıklarıdır.",
+        "Egzersiz yaşlı yetişkinlerde kronik hastalıkların önlenmesi, motor becerilerin korunması, bağışıklık işlevi, ruh sağlığı ve bilişsel işlevlerle ilişkilidir. Aerobik aktivite, esneme ve güç antrenmanları birlikte düşünüldüğünde daha koruyucu olabilir.",
+        "Beslenme de başarılı yaşlanmanın temel parçasıdır. Yeterli protein, vitamin ve mineral alımı, aşırı kalori ve hareketsizlikten kaçınma, zihinsel uyarım ve sosyal destekle birleştiğinde yaşlı bireyin işlevselliğini korur. Başarılı yaşlanma yalnız hastalık yokluğu değil, aktif ve anlamlı yaşamı sürdürebilmedir.",
+      ],
+      keywords: ["duyusal kayıp", "egzersiz", "beslenme", "osteoporoz", "başarılı yaşlanma"],
+    },
+    {
+      id: "essay-ileri-04",
+      sourceKey: "ileri",
+      source: SOURCE_LABELS.ileri,
+      topic: "Bilişsel yaşlanma",
+      question: "İleri yetişkinlikte bilişsel mekanikler ve bilişsel pragmatikler nasıl değişir? Bellek türleri ve dikkat açısından örnekleyiniz.",
+      answer: [
+        "Bilişsel mekanikler zihnin donanımı gibidir; hız, duyusal girdi, ayırt etme, karşılaştırma ve temel işlem doğruluğu gibi süreçleri içerir. Yaşla birlikte işlem hızı, bölünmüş dikkat ve çalışma belleği gibi alanlarda düşüş görülebilir.",
+        "Bilişsel pragmatikler ise kültüre, deneyime ve eğitime dayalı bilgi birikimidir. Dil, kelime bilgisi, mesleki bilgi, yaşam becerileri ve uzmanlık bu alana girer. Bu nedenle yaşlı yetişkin bazı hızlı işlem görevlerinde zorlanırken, deneyime dayalı yargılarda güçlü kalabilir.",
+        "Episodik bellek yaşam olaylarının nerede ve ne zaman yaşandığıyla ilgilidir ve yaşla daha kırılgan hale gelebilir. Anlamsal bellek dünya bilgisi ve kelime bilgisiyle ilgilidir ve çoğu zaman daha iyi korunur. Dilimin ucunda fenomeni, kelimeyi bilip o anda geri çağıramama şeklinde görülebilir.",
+      ],
+      keywords: ["bilişsel mekanikler", "bilişsel pragmatikler", "episodik bellek", "anlamsal bellek", "dikkat"],
+    },
+    {
+      id: "essay-ileri-05",
+      sourceKey: "ileri",
+      source: SOURCE_LABELS.ileri,
+      topic: "Demans ve beyin bozuklukları",
+      question: "Demans, Alzheimer hastalığı, Parkinson hastalığı ve çoklu damar tıkanmasına bağlı demansı ayırt ediniz.",
+      answer: [
+        "Demans, zihinsel işlevlerin bozulmasıyla giden nörolojik bozuklukların genel adıdır. Alzheimer hastalığı demansın en bilinen türlerinden biridir; bellek, muhakeme, dil ve sonunda fiziksel işlevlerde ilerleyici ve geri dönüşsüz bozulma ile seyreder.",
+        "Parkinson hastalığı dopamin üreten sinirlerin zarar görmesiyle ilişkilidir. Titreme, hareketlerin yavaşlaması, kas sertliği ve yüz ifadelerinde azalma gibi motor belirtiler öne çıkar; bazı vakalarda bilişsel bozulma da eşlik edebilir.",
+        "Çoklu damar tıkanmasına bağlı demans ise beyindeki damar sorunları ve kan akışı bozulmalarıyla ilişkilidir. Alzheimer daha sürekli kötüleşme eğilimi gösterirken, vasküler demansta belirtiler basamaklı veya düzensiz ilerleyebilir. Bu ayrım tanı ve bakım planı açısından önemlidir.",
+      ],
+      keywords: ["demans", "Alzheimer", "Parkinson", "vasküler demans", "dopamin"],
+    },
+    {
+      id: "essay-ileri-06",
+      sourceKey: "ileri",
+      source: SOURCE_LABELS.ileri,
+      topic: "Sosyoduygusal yaşlanma",
+      question: "Erikson'un benlik bütünlüğüne karşı umutsuzluk dönemi, yaşamı gözden geçirme, sosyoduygusal seçicilik ve seçici optimizasyon kuramlarını birlikte açıklayınız.",
+      answer: [
+        "Erikson'a göre ileri yetişkinlikte temel kriz benlik bütünlüğüne karşı umutsuzluktur. Birey geçmiş yaşamını anlamlı ve bütünlüklü görürse benlik bütünlüğü geliştirir; yaşamını boşa harcadığını düşünürse pişmanlık ve umutsuzluk yaşayabilir.",
+        "Yaşamı gözden geçirme, kişinin olumlu anıları kadar pişmanlıklarını da değerlendirip yaşamına anlam vermesidir. Bu süreç bilgelik, kabullenme ve ölümle daha barışık olma açısından önem taşır.",
+        "Sosyoduygusal seçicilik kuramı, yaşlı bireylerin daha anlamlı ve duygusal doyum sağlayan ilişkileri seçtiğini savunur. Ödünleme yoluyla seçici optimizasyon ise bireyin kapasitesi azaldığında hedeflerini seçmesi, güçlü alanlarını optimize etmesi ve kayıpları telafi etmesini açıklar. Bu kuramlar başarılı yaşlanmanın aktif uyum içerdiğini gösterir.",
+      ],
+      keywords: ["benlik bütünlüğü", "yaşamı gözden geçirme", "sosyoduygusal seçicilik", "optimizasyon", "ödünleme"],
+    },
+    {
+      id: "essay-olum-01",
+      sourceKey: "olum",
+      source: SOURCE_LABELS.olum,
+      topic: "Ölüm sistemi ve kültür",
+      question: "Ölüm sistemi kavramını açıklayınız. Kültürel çeşitliliğin ölüm, cenaze ve yas tutma biçimlerini nasıl etkilediğini örneklerle tartışınız.",
+      answer: [
+        "Ölüm sistemi, bir kültürde ölümle ilgili insanlar, mekanlar, zamanlar, nesneler ve sembollerden oluşan düzeni ifade eder. Her toplum ölümün ne anlama geldiğini, ölünün bedenine ne yapılacağını, kimin yas tutacağını ve hangi ritüellerin uygulanacağını farklı biçimde tanımlar.",
+        "Bazı kültürlerde ölüm ruhun başka bir yaşama geçişi olarak görülürken, bazı kültürlerde biyolojik son olarak yorumlanır. Cenaze töreni, naaş yakımı, siyah giyme, yemek verme veya ölen kişiyle bağın sürdürülmesi gibi uygulamalar kültüre göre değişir.",
+        "Bu çeşitlilik, yasın tek ve evrensel bir kalıbı olmadığını gösterir. Psikolojik destek verirken kişinin kültürel, dini ve ailevi anlam sistemini dikkate almak gerekir.",
+      ],
+      keywords: ["ölüm sistemi", "kültür", "ritüel", "cenaze", "yas"],
+    },
+    {
+      id: "essay-olum-02",
+      sourceKey: "olum",
+      source: SOURCE_LABELS.olum,
+      topic: "Ölümü tanımlamak",
+      question: "Beyin ölümü kavramını açıklayınız. Günümüzde ölümü belirlemenin geçmişe göre neden daha karmaşık hale geldiğini tartışınız.",
+      answer: [
+        "Geçmişte ölüm çoğunlukla nefes alma, kalp atışı ve kan basıncı gibi biyolojik işlevlerin durmasıyla belirlenirdi. Tıbbi teknolojiler geliştikçe solunum ve dolaşım yapay olarak sürdürülebildiği için ölümün tanımı karmaşıklaşmıştır.",
+        "Beyin ölümü, beynin elektriksel etkinliğinin belirli bir süre bütünüyle durması ve hem kortikal işlevlerin hem beyin sapı işlevlerinin sona ermesiyle açıklanır. Düz EEG kaydı bu değerlendirmede ölçütlerden biridir.",
+        "Bu karmaşıklık etik ve hukuki kararları da etkiler. Yaşam desteğinin sürdürülmesi, organ bağışı, aile onayı ve hastanın önceden bildirdiği istekler ölümün yalnız biyolojik değil, aynı zamanda sosyal ve ahlaki bir karar alanı olduğunu gösterir.",
+      ],
+      keywords: ["beyin ölümü", "EEG", "yaşam desteği", "etik", "tıbbi teknoloji"],
+    },
+    {
+      id: "essay-olum-03",
+      sourceKey: "olum",
+      source: SOURCE_LABELS.olum,
+      topic: "Yaşam sonu bakım",
+      question: "Yaşam vasiyeti, ötenazi, pasif ötenazi, aktif ötenazi, bakımevi ve yatıştırıcı bakım kavramlarını karşılaştırınız.",
+      answer: [
+        "Yaşam vasiyeti, kişinin tıbbi karar veremeyeceği durumda hangi tedavileri isteyip istemediğini önceden belirtmesidir. Bu belge aile ve sağlık çalışanları için yol gösterici olabilir.",
+        "Ötenazi, tedavisi imkansız hastalık veya ağır engel durumunda yaşamı acısız biçimde sona erdirme eylemidir. Pasif ötenazi tedavinin veya yaşam desteğinin kesilmesiyle ölmesine izin vermeyi; aktif ötenazi ise ölümcül doz ilaç verme gibi doğrudan yaşamı sonlandıran eylemleri anlatır.",
+        "Bakımevi/hospis ve yatıştırıcı bakım ise ölümü hızlandırmaktan çok ağrıyı azaltma, kaygıyı düşürme, onuru koruma ve yaşam sonu kalitesini artırma amacı taşır. Bu kavramlar etik, hukuk, kültür ve bireysel özerklik açısından birlikte değerlendirilmelidir.",
+      ],
+      keywords: ["yaşam vasiyeti", "ötenazi", "pasif", "aktif", "palyatif bakım"],
+    },
+    {
+      id: "essay-olum-04",
+      sourceKey: "olum",
+      source: SOURCE_LABELS.olum,
+      topic: "Kübler-Ross",
+      question: "Kübler-Ross'un ölüm evrelerini sıralayıp açıklayınız. Bu modelin hangi yönlerden sınırlı olabileceğini tartışınız.",
+      answer: [
+        "Kübler-Ross ölmekte olan insanların tepkilerini beş evreyle açıklar: inkar ve yalıtılmışlık, öfke, uzlaşma, depresyon ve kabullenme. İnkar kişinin ölmekte olduğunu reddetmesi; öfke hiddet ve küskünlük; uzlaşma ölümün ertelenebileceği umudu; depresyon kesinliği fark etme; kabullenme ise huzur ve kabul duygusudur.",
+        "Model ölümle yüzleşme sürecini anlamak için yararlı bir çerçeve sunar. Ancak herkes bu evreleri aynı sırayla, aynı yoğunlukta veya tamamını yaşayarak geçirmez.",
+        "Yas ve ölüm tepkileri kişilik, kültür, dini inanç, hastalığın türü, sosyal destek ve ölümün ani ya da beklenen olmasına göre değişir. Bu nedenle model katı bir sıra gibi değil, olası tepkileri anlamaya yarayan esnek bir çerçeve olarak kullanılmalıdır.",
+      ],
+      keywords: ["inkar", "öfke", "uzlaşma", "depresyon", "kabullenme"],
+    },
+    {
+      id: "essay-olum-05",
+      sourceKey: "olum",
+      source: SOURCE_LABELS.olum,
+      topic: "Yas türleri",
+      question: "Yas, uzamış yas, mahrum kalınmış yas ve travmatik yas kavramlarını açıklayınız.",
+      answer: [
+        "Yas, sevilen bir kişinin kaybından sonra yaşanan duygusal uyuşukluk, inanmama, özlem, ayrılık kaygısı, çaresizlik, üzüntü ve yalnızlık sürecidir. Normal yas zaman içinde dalgalanarak azalabilir; kişi kayıpla yaşamayı öğrenir.",
+        "Uzamış yas, uzun süre geçmesine rağmen çözülemeyen ve kalıcı çaresizlik içeren yas biçimidir. Kişi günlük yaşama dönmekte zorlanabilir ve depresyon ya da intihar riski artabilir.",
+        "Mahrum kalınmış yas, toplum tarafından açıkça desteklenmeyen veya meşru görülmeyen kayıplarda yaşanır; örneğin gizli ilişki, kürtaj ya da damgalanan ölüm biçimleri. Travmatik yas ise ani, şiddetli veya beklenmedik ölümlerde kendini suçlama, kaygı ve depresyon belirtileriyle ağırlaşabilir.",
+      ],
+      keywords: ["yas", "uzamış yas", "mahrum kalınmış yas", "travmatik yas", "özlem"],
+    },
+    {
+      id: "essay-olum-06",
+      sourceKey: "olum",
+      source: SOURCE_LABELS.olum,
+      topic: "İkili süreç modeli",
+      question: "Yasla başa çıkmada ikili süreç modelini açıklayınız. Kayıp odaklı ve iyileşme odaklı stres kaynaklarına örnek veriniz.",
+      answer: [
+        "İkili süreç modeli, yasla başa çıkmanın tek çizgisel bir süreç olmadığını; kişinin kayıp odaklı ve iyileşme odaklı stres kaynakları arasında gidip geldiğini savunur.",
+        "Kayıp odaklı stres kaynakları ölen kişiyi düşünme, özlem duyma, ölüm hakkında tekrar tekrar düşünme ve kaybın anlamını değerlendirme gibi tepkileri içerir. Örneğin eşini kaybeden kişinin eski fotoğraflara bakıp yoğun keder yaşaması bu boyuta girer.",
+        "İyileşme odaklı stres kaynakları ise kaybın ardından ortaya çıkan yeni yaşam görevleridir: dul kimliğine uyum sağlama, maddi işleri düzenleme, ev sorumluluklarını üstlenme veya sosyal rolleri yeniden kurma. Sağlıklı başa çıkma bu iki boyut arasında esnek gidip gelebilmeyi içerir.",
+      ],
+      keywords: ["ikili süreç", "kayıp odaklı", "iyileşme odaklı", "baş etme", "uyum"],
+    },
+  ];
+
   const SOURCE_ORDER = ["genc", "orta", "ileri", "olum"];
   const TEMPLATES = [
     (definition) => `Aşağıdaki kavramlardan hangisi şu açıklamaya karşılık gelir: ${definition}`,
@@ -389,8 +704,9 @@
   root.PSYCH_SOURCE_LABELS = SOURCE_LABELS;
   root.PSYCH_CONCEPTS = CONCEPTS;
   root.PSYCH_EXAMS = EXAMS;
+  root.PSYCH_ESSAY_QUESTIONS = ESSAY_QUESTIONS;
 
   if (typeof module !== "undefined") {
-    module.exports = { SOURCE_LABELS, CONCEPTS, EXAMS };
+    module.exports = { SOURCE_LABELS, CONCEPTS, EXAMS, ESSAY_QUESTIONS };
   }
 })();

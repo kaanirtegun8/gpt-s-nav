@@ -20,11 +20,20 @@
       </div>
       <div class="header-stat">
         <strong>350</strong>
-        <span>soru</span>
+        <span>test soru</span>
+      </div>
+      <div class="header-stat">
+        <strong>24</strong>
+        <span>klasik</span>
       </div>
     </header>
 
     <main>
+      <nav class="top-tabs" id="topTabs" aria-label="Çalışma türü">
+        <button class="top-tab is-active" type="button" id="examTabButton" aria-pressed="true">Test sınavları</button>
+        <button class="top-tab" type="button" id="essayTabButton" aria-pressed="false">Klasik sorular</button>
+      </nav>
+
       <section class="setup-view" id="setupView">
         <div class="section-head">
           <div>
@@ -56,6 +65,17 @@
           </label>
           <button class="primary-action" type="button" id="startExam">Sınava başla</button>
         </div>
+      </section>
+
+      <section class="essay-view" id="essayView" hidden>
+        <div class="section-head">
+          <div>
+            <h2>Klasik sorular</h2>
+            <p>Gelişim psikolojisi 2. sınıf düzeyinde yazılıya uygun açık uçlu sorular. Örnek cevapları görmek için kartlardaki butona bas.</p>
+          </div>
+        </div>
+        <div class="essay-toolbar" id="essayFilters" aria-label="Klasik soru filtreleri"></div>
+        <div class="essay-grid" id="essayGrid"></div>
       </section>
 
       <section class="exam-view" id="examView" hidden>
@@ -115,6 +135,18 @@
         </div>
         <div class="review-list" id="reviewList"></div>
       </section>
+
+      <div class="modal-backdrop" id="finishModal" hidden>
+        <section class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="finishModalTitle">
+          <p class="eyebrow">Onay</p>
+          <h2 id="finishModalTitle">Sınavı bitirmek istiyor musun?</h2>
+          <p id="finishSummary">Cevaplar ve puanlama açılacak. Bu işlemden sonra cevapları değiştiremezsin.</p>
+          <div class="modal-actions">
+            <button class="secondary-action" type="button" id="cancelFinish">Devam et</button>
+            <button class="primary-action" type="button" id="confirmFinish">Evet, bitir</button>
+          </div>
+        </section>
+      </div>
     </main>
   </body>
 </html>

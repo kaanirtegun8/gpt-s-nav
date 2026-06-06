@@ -50,6 +50,10 @@ input:disabled {
   opacity: 0.72;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 main,
 .app-header {
   width: min(1180px, calc(100% - 32px));
@@ -58,7 +62,7 @@ main,
 
 .app-header {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) repeat(3, auto);
   gap: 12px;
   align-items: center;
   padding: 28px 0 18px;
@@ -111,6 +115,7 @@ main,
 }
 
 .setup-view,
+.essay-view,
 .results-view {
   display: grid;
   gap: 18px;
@@ -123,6 +128,8 @@ main,
 .question-card,
 .results-summary,
 .breakdown-grid > div,
+.essay-card,
+.confirm-modal,
 .review-item {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -137,9 +144,38 @@ main,
 .section-head p,
 .mode-panel p,
 .exam-sidebar p,
+.essay-answer p,
 .review-head p {
   margin: 7px 0 0;
   color: var(--muted);
+}
+
+.top-tabs {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 6px;
+  margin: 0 0 18px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: var(--shadow);
+}
+
+.top-tab {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.top-tab.is-active {
+  border-color: rgba(15, 118, 110, 0.25);
+  background: var(--teal-soft);
+  color: var(--teal);
 }
 
 .exam-grid {
@@ -243,6 +279,92 @@ main,
   padding: 0;
   background: transparent;
   color: var(--teal);
+}
+
+.essay-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.filter-button.is-active {
+  border-color: rgba(15, 118, 110, 0.35);
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+.essay-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.essay-card {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 18px;
+  box-shadow: none;
+}
+
+.essay-card__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+}
+
+.essay-count {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.essay-card h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.keyword-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.keyword-row span {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: var(--surface-strong);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.essay-answer {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-strong);
+}
+
+.essay-answer p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.55;
 }
 
 .exam-view {
@@ -466,6 +588,8 @@ main,
 .primary-action:focus-visible,
 .secondary-action:focus-visible,
 .text-action:focus-visible,
+.top-tab:focus-visible,
+.filter-button:focus-visible,
 .exam-tile:focus-visible,
 .nav-dot:focus-visible {
   outline: 3px solid rgba(15, 118, 110, 0.25);
@@ -505,6 +629,40 @@ main,
   flex-wrap: wrap;
   gap: 10px;
   justify-content: flex-end;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(12, 18, 24, 0.56);
+}
+
+.confirm-modal {
+  width: min(480px, 100%);
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  background: var(--surface);
+}
+
+.confirm-modal h2,
+.confirm-modal p {
+  margin: 0;
+}
+
+.confirm-modal p:not(.eyebrow) {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .results-view {
@@ -604,12 +762,13 @@ main,
   .app-header,
   .mode-panel,
   .exam-view,
+  .essay-grid,
   .breakdown-grid {
     grid-template-columns: 1fr;
   }
 
   .app-header {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .app-header > div:first-child {
@@ -651,8 +810,14 @@ main,
   }
 
   .exam-actions,
+  .modal-actions,
   .results-summary {
     display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .top-tabs {
+    width: 100%;
     grid-template-columns: 1fr;
   }
 
