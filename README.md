@@ -8,6 +8,9 @@
 - Puanlama, soru türü kırılımı, PDF kaynağı kırılımı ve cevap anahtarı
 - Ayrı klasik sorular sekmesi
 - 24 klasik soru ve açılır örnek cevaplar
+- Ayrı öğrenme oyunu sekmesi
+- Kavram Avı ve Eşleştir oyun modları
+- 71 önemli kavram kartı
 
 ## Netlify
 

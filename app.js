@@ -1,11 +1,25 @@
 const exams = window.PSYCH_EXAMS || [];
 const essayQuestions = window.PSYCH_ESSAY_QUESTIONS || [];
+const importantConcepts = window.PSYCH_IMPORTANT_CONCEPTS || [];
 
 const state = {
   selectedExamId: 1,
   activeExam: null,
   activeTab: "exam",
   essayFilter: "all",
+  gameMode: "hunt",
+  gameRound: [],
+  gameIndex: 0,
+  gameScore: 0,
+  gameStreak: 0,
+  gameCorrect: 0,
+  gameAnswered: false,
+  gameSelectedAnswer: "",
+  matchRound: [],
+  matchDefinitionOrder: [],
+  selectedMatchTerm: "",
+  matchedConceptIds: [],
+  matchMessage: "",
   mode: "finish",
   currentIndex: 0,
   answers: {},
@@ -23,12 +37,21 @@ function initializeElements() {
   els.topTabs = $("#topTabs");
   els.examTabButton = $("#examTabButton");
   els.essayTabButton = $("#essayTabButton");
+  els.gameTabButton = $("#gameTabButton");
   els.examGrid = $("#examGrid");
   els.startButton = $("#startExam");
   els.setup = $("#setupView");
   els.essay = $("#essayView");
   els.essayFilters = $("#essayFilters");
   els.essayGrid = $("#essayGrid");
+  els.game = $("#gameView");
+  els.gameModes = $("#gameModes");
+  els.gameScore = $("#gameScore");
+  els.gameStreak = $("#gameStreak");
+  els.gameCorrect = $("#gameCorrect");
+  els.startGameButton = $("#startGame");
+  els.gameStage = $("#gameStage");
+  els.conceptGrid = $("#conceptGrid");
   els.exam = $("#examView");
   els.results = $("#resultsView");
   els.modeRadios = [...document.querySelectorAll("input[name='answerMode']")];
@@ -172,11 +195,17 @@ function renderExamGrid() {
 }
 
 function renderTabs() {
-  const isExamTab = state.activeTab === "exam";
-  els.examTabButton.classList.toggle("is-active", isExamTab);
-  els.essayTabButton.classList.toggle("is-active", !isExamTab);
-  els.examTabButton.setAttribute("aria-pressed", String(isExamTab));
-  els.essayTabButton.setAttribute("aria-pressed", String(!isExamTab));
+  const buttons = [
+    [els.examTabButton, "exam"],
+    [els.essayTabButton, "essay"],
+    [els.gameTabButton, "game"],
+  ];
+
+  buttons.forEach(([button, tabName]) => {
+    const active = state.activeTab === tabName;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
 }
 
 function showHomeTab(tabName) {
@@ -187,11 +216,14 @@ function showHomeTab(tabName) {
   els.results.hidden = true;
   els.setup.hidden = tabName !== "exam";
   els.essay.hidden = tabName !== "essay";
+  els.game.hidden = tabName !== "game";
 
   if (tabName === "exam") {
     renderExamGrid();
-  } else {
+  } else if (tabName === "essay") {
     renderEssayQuestions();
+  } else {
+    renderGameView();
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -260,6 +292,304 @@ function renderEssayQuestions() {
   });
 }
 
+function shuffleItems(items) {
+  return [...items].sort(() => Math.random() - 0.5);
+}
+
+function resetGameStats() {
+  state.gameScore = 0;
+  state.gameStreak = 0;
+  state.gameCorrect = 0;
+  state.gameAnswered = false;
+  state.gameSelectedAnswer = "";
+  state.gameIndex = 0;
+  state.selectedMatchTerm = "";
+  state.matchDefinitionOrder = [];
+  state.matchedConceptIds = [];
+  state.matchMessage = "";
+}
+
+function renderGameView() {
+  renderGameModes();
+  renderGameStats();
+  renderConceptGrid();
+
+  if (state.gameMode === "hunt") {
+    renderHuntStage();
+  } else {
+    renderMatchStage();
+  }
+}
+
+function renderGameModes() {
+  const modes = [
+    {
+      key: "hunt",
+      title: "Kavram Avı",
+      meta: "Tanımı oku, doğru kavramı yakala.",
+    },
+    {
+      key: "match",
+      title: "Eşleştir",
+      meta: "Kavramı doğru tanımla çiftleştir.",
+    },
+  ];
+
+  els.gameModes.innerHTML = modes
+    .map((mode) => `
+      <button class="game-mode ${state.gameMode === mode.key ? "is-active" : ""}" type="button" data-game-mode="${mode.key}" aria-pressed="${state.gameMode === mode.key}">
+        <strong>${mode.title}</strong>
+        <span>${mode.meta}</span>
+      </button>
+    `)
+    .join("");
+
+  els.gameModes.querySelectorAll("[data-game-mode]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.gameMode = button.dataset.gameMode;
+      resetGameStats();
+      state.gameRound = [];
+      state.matchRound = [];
+      renderGameView();
+    });
+  });
+}
+
+function renderGameStats() {
+  els.gameScore.textContent = state.gameScore;
+  els.gameStreak.textContent = state.gameStreak;
+  els.gameCorrect.textContent = state.gameCorrect;
+}
+
+function makeGameOptions(concept) {
+  const sameSource = importantConcepts.filter((item) => item.source === concept.source && item.id !== concept.id);
+  const otherSources = importantConcepts.filter((item) => item.source !== concept.source);
+  const wrongOptions = shuffleItems([...sameSource, ...otherSources])
+    .filter((item, index, array) => array.findIndex((candidate) => candidate.term === item.term) === index)
+    .slice(0, 3)
+    .map((item) => item.term);
+
+  return shuffleItems([concept.term, ...wrongOptions]);
+}
+
+function startGame() {
+  resetGameStats();
+
+  if (state.gameMode === "hunt") {
+    state.gameRound = shuffleItems(importantConcepts).slice(0, 12).map((concept) => ({
+      ...concept,
+      options: makeGameOptions(concept),
+    }));
+    renderHuntStage();
+    return;
+  }
+
+  state.matchRound = shuffleItems(importantConcepts).slice(0, 6);
+  state.matchDefinitionOrder = shuffleItems(state.matchRound);
+  renderMatchStage();
+}
+
+function renderHuntStage() {
+  if (state.gameRound.length === 0) {
+    els.gameStage.innerHTML = `
+      <div class="game-empty">
+        <p class="eyebrow">Kavram Avı</p>
+        <h2>12 soruluk hızlı tur</h2>
+        <p>Her turda genç, orta, ileri yetişkinlik ve ölüm-yas kavramları karışık gelir. Doğru cevaplar seri puanı kazandırır.</p>
+      </div>
+    `;
+    return;
+  }
+
+  if (state.gameIndex >= state.gameRound.length) {
+    renderGameComplete("Kavram Avı tamamlandı");
+    return;
+  }
+
+  const concept = state.gameRound[state.gameIndex];
+  const progress = `${state.gameIndex + 1}/${state.gameRound.length}`;
+
+  els.gameStage.innerHTML = `
+    <article class="game-card">
+      <div class="game-card__top">
+        <span class="question-kicker">Kavram Avı · ${progress}</span>
+        <span class="source-chip source-${concept.source}">
+          <span>${SOURCE_LABELS_SAFE[concept.source]}</span>
+          <small>${concept.topic}</small>
+        </span>
+      </div>
+      <h2>${concept.definition}</h2>
+      <div class="game-options">
+        ${concept.options.map((option) => {
+          const selected = state.gameSelectedAnswer === option;
+          const isAnswer = concept.term === option;
+          const classes = [
+            "game-option",
+            selected ? "is-selected" : "",
+            state.gameAnswered && isAnswer ? "is-correct" : "",
+            state.gameAnswered && selected && !isAnswer ? "is-wrong" : "",
+          ].filter(Boolean).join(" ");
+
+          return `<button class="${classes}" type="button" data-game-option="${encodeURIComponent(option)}" ${state.gameAnswered ? "disabled" : ""}>${option}</button>`;
+        }).join("")}
+      </div>
+      ${state.gameAnswered ? `
+        <div class="feedback ${state.gameSelectedAnswer === concept.term ? "is-correct" : "is-wrong"}">
+          <strong>${state.gameSelectedAnswer === concept.term ? "Doğru yakaladın" : "Kaçtı"}</strong>
+          <span>Doğru cevap: ${concept.term}</span>
+          <p>${concept.fill}</p>
+        </div>
+        <button class="primary-action" type="button" id="nextGameQuestion">${state.gameIndex === state.gameRound.length - 1 ? "Sonucu gör" : "Sonraki kavram"}</button>
+      ` : `
+        <div class="feedback is-muted">Cevap seçince anında geri bildirim alırsın.</div>
+      `}
+    </article>
+  `;
+
+  els.gameStage.querySelectorAll("[data-game-option]").forEach((button) => {
+    button.addEventListener("click", () => answerHuntQuestion(decodeURIComponent(button.dataset.gameOption)));
+  });
+
+  const nextButton = $("#nextGameQuestion");
+  if (nextButton) {
+    nextButton.addEventListener("click", () => {
+      state.gameIndex += 1;
+      state.gameAnswered = false;
+      state.gameSelectedAnswer = "";
+      renderHuntStage();
+    });
+  }
+}
+
+const SOURCE_LABELS_SAFE = window.PSYCH_SOURCE_LABELS || {};
+
+function answerHuntQuestion(answer) {
+  if (state.gameAnswered) return;
+  const concept = state.gameRound[state.gameIndex];
+  const correct = answer === concept.term;
+  state.gameAnswered = true;
+  state.gameSelectedAnswer = answer;
+
+  if (correct) {
+    state.gameStreak += 1;
+    state.gameCorrect += 1;
+    state.gameScore += 10 + Math.min(state.gameStreak * 2, 12);
+  } else {
+    state.gameStreak = 0;
+  }
+
+  renderGameStats();
+  renderHuntStage();
+}
+
+function renderMatchStage() {
+  if (state.matchRound.length === 0) {
+    els.gameStage.innerHTML = `
+      <div class="game-empty">
+        <p class="eyebrow">Eşleştir</p>
+        <h2>6 kavramlık eşleştirme turu</h2>
+        <p>Önce soldan kavramı, sonra sağdan doğru tanımı seç. Karışık çalıştığın için benzer kavramları ayırt etmen kolaylaşır.</p>
+      </div>
+    `;
+    return;
+  }
+
+  if (state.matchedConceptIds.length === state.matchRound.length) {
+    renderGameComplete("Eşleştirme tamamlandı");
+    return;
+  }
+
+  const definitions = state.matchDefinitionOrder.length ? state.matchDefinitionOrder : state.matchRound;
+
+  els.gameStage.innerHTML = `
+    <article class="game-card">
+      <div class="game-card__top">
+        <span class="question-kicker">Eşleştir · ${state.matchedConceptIds.length}/${state.matchRound.length}</span>
+        <span class="match-message">${state.matchMessage || "Bir kavram seç, sonra tanımını bul."}</span>
+      </div>
+      <div class="match-board">
+        <div class="match-column">
+          <h3>Kavramlar</h3>
+          ${state.matchRound.map((concept) => {
+            const matched = state.matchedConceptIds.includes(concept.id);
+            const selected = state.selectedMatchTerm === concept.id;
+            return `<button class="match-item ${matched ? "is-matched" : ""} ${selected ? "is-selected" : ""}" type="button" data-match-term="${concept.id}" ${matched ? "disabled" : ""}>${concept.term}</button>`;
+          }).join("")}
+        </div>
+        <div class="match-column">
+          <h3>Tanımlar</h3>
+          ${definitions.map((concept) => {
+            const matched = state.matchedConceptIds.includes(concept.id);
+            return `<button class="match-item ${matched ? "is-matched" : ""}" type="button" data-match-definition="${concept.id}" ${matched ? "disabled" : ""}>${concept.definition}</button>`;
+          }).join("")}
+        </div>
+      </div>
+    </article>
+  `;
+
+  els.gameStage.querySelectorAll("[data-match-term]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.selectedMatchTerm = button.dataset.matchTerm;
+      state.matchMessage = "Şimdi doğru tanımı seç.";
+      renderMatchStage();
+    });
+  });
+
+  els.gameStage.querySelectorAll("[data-match-definition]").forEach((button) => {
+    button.addEventListener("click", () => answerMatch(button.dataset.matchDefinition));
+  });
+}
+
+function answerMatch(definitionId) {
+  if (!state.selectedMatchTerm) {
+    state.matchMessage = "Önce soldan bir kavram seç.";
+    renderMatchStage();
+    return;
+  }
+
+  if (state.selectedMatchTerm === definitionId) {
+    state.matchedConceptIds.push(definitionId);
+    state.gameCorrect += 1;
+    state.gameStreak += 1;
+    state.gameScore += 15 + Math.min(state.gameStreak * 3, 15);
+    state.matchMessage = "Doğru eşleşme.";
+  } else {
+    state.gameStreak = 0;
+    state.matchMessage = "Bu tanım başka bir kavrama ait, tekrar dene.";
+  }
+
+  state.selectedMatchTerm = "";
+  renderGameStats();
+  renderMatchStage();
+}
+
+function renderGameComplete(title) {
+  const total = state.gameMode === "hunt" ? state.gameRound.length : state.matchRound.length;
+  const percent = Math.round((state.gameCorrect / total) * 100);
+  els.gameStage.innerHTML = `
+    <div class="game-empty">
+      <p class="eyebrow">Sonuç</p>
+      <h2>${title}</h2>
+      <p>${state.gameCorrect}/${total} doğru · ${state.gameScore} puan · %${percent}</p>
+      <button class="primary-action" type="button" id="playAgain">Tekrar oyna</button>
+    </div>
+  `;
+
+  $("#playAgain").addEventListener("click", startGame);
+}
+
+function renderConceptGrid() {
+  els.conceptGrid.innerHTML = importantConcepts
+    .map((concept) => `
+      <article class="concept-card source-border-${concept.source}">
+        <span>${SOURCE_LABELS_SAFE[concept.source]} · ${concept.topic}</span>
+        <h4>${concept.term}</h4>
+        <p>${concept.definition}</p>
+      </article>
+    `)
+    .join("");
+}
+
 function updateModeFromInputs() {
   state.mode = els.modeRadios.find((radio) => radio.checked)?.value || "finish";
 }
@@ -274,6 +604,7 @@ function startExam() {
 
   els.setup.hidden = true;
   els.essay.hidden = true;
+  els.game.hidden = true;
   els.topTabs.hidden = true;
   els.results.hidden = true;
   els.exam.hidden = false;
@@ -582,7 +913,9 @@ function metricRow(label, correct, total) {
 function bindEvents() {
   els.examTabButton.addEventListener("click", () => showHomeTab("exam"));
   els.essayTabButton.addEventListener("click", () => showHomeTab("essay"));
+  els.gameTabButton.addEventListener("click", () => showHomeTab("game"));
   els.startButton.addEventListener("click", startExam);
+  els.startGameButton.addEventListener("click", startGame);
   els.prevButton.addEventListener("click", () => moveQuestion(-1));
   els.nextButton.addEventListener("click", () => moveQuestion(1));
   els.finishButton.addEventListener("click", openFinishModal);

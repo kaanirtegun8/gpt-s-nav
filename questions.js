@@ -700,13 +700,28 @@
   }
 
   const EXAMS = Array.from({ length: 10 }, (_, index) => buildExam(index + 1));
+  const IMPORTANT_CONCEPT_IDS = [
+    "genc01", "genc05", "genc09", "genc12", "genc16", "genc18", "genc22", "genc27",
+    "genc33", "genc39", "genc40", "genc41", "genc42", "genc47", "genc50", "genc54",
+    "orta01", "orta07", "orta11", "orta14", "orta15", "orta19", "orta20", "orta21",
+    "orta22", "orta25", "orta34", "orta35", "orta36", "orta39", "orta44", "orta50",
+    "ileri01", "ileri02", "ileri06", "ileri08", "ileri10", "ileri11", "ileri12", "ileri13",
+    "ileri16", "ileri28", "ileri34", "ileri35", "ileri39", "ileri40", "ileri43", "ileri44",
+    "ileri49", "ileri50", "ileri51", "ileri56", "ileri59", "ileri60", "ileri67", "ileri74",
+    "olum01", "olum06", "olum09", "olum10", "olum11", "olum12", "olum16", "olum17",
+    "olum23", "olum30", "olum32", "olum33", "olum35", "olum36", "olum37",
+  ];
+  const IMPORTANT_CONCEPTS = IMPORTANT_CONCEPT_IDS
+    .map((id) => CONCEPTS.find((concept) => concept.id === id))
+    .filter(Boolean);
   const root = typeof window !== "undefined" ? window : globalThis;
   root.PSYCH_SOURCE_LABELS = SOURCE_LABELS;
   root.PSYCH_CONCEPTS = CONCEPTS;
   root.PSYCH_EXAMS = EXAMS;
   root.PSYCH_ESSAY_QUESTIONS = ESSAY_QUESTIONS;
+  root.PSYCH_IMPORTANT_CONCEPTS = IMPORTANT_CONCEPTS;
 
   if (typeof module !== "undefined") {
-    module.exports = { SOURCE_LABELS, CONCEPTS, EXAMS, ESSAY_QUESTIONS };
+    module.exports = { SOURCE_LABELS, CONCEPTS, EXAMS, ESSAY_QUESTIONS, IMPORTANT_CONCEPTS };
   }
 })();

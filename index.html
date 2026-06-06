@@ -26,12 +26,17 @@
         <strong>24</strong>
         <span>klasik</span>
       </div>
+      <div class="header-stat">
+        <strong>71</strong>
+        <span>oyun kavramı</span>
+      </div>
     </header>
 
     <main>
       <nav class="top-tabs" id="topTabs" aria-label="Çalışma türü">
         <button class="top-tab is-active" type="button" id="examTabButton" aria-pressed="true">Test sınavları</button>
         <button class="top-tab" type="button" id="essayTabButton" aria-pressed="false">Klasik sorular</button>
+        <button class="top-tab" type="button" id="gameTabButton" aria-pressed="false">Öğrenme Oyunu</button>
       </nav>
 
       <section class="setup-view" id="setupView">
@@ -76,6 +81,49 @@
         </div>
         <div class="essay-toolbar" id="essayFilters" aria-label="Klasik soru filtreleri"></div>
         <div class="essay-grid" id="essayGrid"></div>
+      </section>
+
+      <section class="game-view" id="gameView" hidden>
+        <div class="section-head">
+          <div>
+            <h2>Öğrenme oyunu</h2>
+            <p>En önemli kavramlarla aktif hatırlama çalış. Kavramlar PDF kaynaklarından karışık gelir, cevap sonrası anında geri bildirim alırsın.</p>
+          </div>
+        </div>
+
+        <div class="game-layout">
+          <aside class="game-panel">
+            <div>
+              <p class="eyebrow">Mod</p>
+              <div class="game-mode-list" id="gameModes"></div>
+            </div>
+            <div class="game-stats">
+              <div>
+                <span>Skor</span>
+                <strong id="gameScore">0</strong>
+              </div>
+              <div>
+                <span>Seri</span>
+                <strong id="gameStreak">0</strong>
+              </div>
+              <div>
+                <span>Doğru</span>
+                <strong id="gameCorrect">0</strong>
+              </div>
+            </div>
+            <button class="primary-action" type="button" id="startGame">Oyunu başlat</button>
+          </aside>
+
+          <div class="game-stage" id="gameStage"></div>
+        </div>
+
+        <div class="concept-section">
+          <div class="review-head">
+            <h3>Önemli kavram kartları</h3>
+            <p>Oyun modları bu kartlardaki kavramlardan seçilir. Kaynağı ve kısa tanımı hızlı tekrar için kullanabilirsin.</p>
+          </div>
+          <div class="concept-grid" id="conceptGrid"></div>
+        </div>
       </section>
 
       <section class="exam-view" id="examView" hidden>
